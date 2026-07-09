@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Redwoods Wonder Forge — STEAM Education in Del Norte County</title>
+<meta name="description" content="Redwoods Wonder Forge is a 100% volunteer-run STEAM education nonprofit in Crescent City, CA. Robotics classes, camps, FIRST LEGO League, and more." />
+
+<!-- ============================================================
+     Redwoods Wonder Forge — outage / holding page
+     Everything below is wired up and ready to deploy.
+
+     FOLDER STRUCTURE (upload the whole folder to your host):
+       index.html          this page
+       404.html            not-found page (same design)
+       assets/logo.png     nav logo (icon-only circular variant)
+       assets/hero.jpg     hero photo (FTC team 25682)
+
+     Wired in: logo, hero photo, Tally contact form (mR4We4),
+     Zeffy donate modal, address + map, email/phone.
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+<!-- Zeffy embed script (powers the Donate modal) -->
+<script src="https://zeffy-scripts.s3.ca-central-1.amazonaws.com/embed-form-script.min.js"></script>
+
+<style>
+  :root {
+    /* RWF brand palette (Design System doc) */
+    --paper:   #D9F4FF;  /* Starlight */
+    --ink:     #000E2C;  /* Dark Sky */
+    --bark:    #313DAE;  /* Night Air — primary: links, buttons */
+    --moss:    #00CFA0;  /* Oxygen — accents */
+    --amber:   #B376BF;  /* Nitrogen — accents */
+    --card:    #FFFFFF;
+    --line:    #AFD4E8;
+    --tape:    #FFFFFF;
+
+    --radius: 14px;
+    --nav-h: 64px;
+  }
+  html.dark {
+    --paper: #000E2C;  /* Dark Sky */
+    --ink:   #D9F4FF;  /* Starlight */
+    --bark:  #00CFA0;  /* Oxygen pops on Dark Sky */
+    --moss:  #00CFA0;
+    --amber: #B376BF;
+    --card:  #0A1838;
+    --line:  #1E2C55;
+    --tape:  #0F1D42;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 12px); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Open Sans", system-ui, sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    transition: background .25s, color .25s;
+  }
+  h1, h2, h3 { font-family: "Montserrat", "Open Sans", sans-serif; line-height: 1.15; }
+  a { color: var(--bark); }
+  img { max-width: 100%; display: block; }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    height: var(--nav-h);
+    display: flex; align-items: center; gap: 12px;
+    padding: 0 16px;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); min-width: 0; }
+  .brand img { height: 40px; width: auto; }
+  .brand-name {
+    font-family: "Montserrat", sans-serif; font-weight: 800;
+    font-size: 1.05rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .nav-spacer { flex: 1; }
+  .nav-links { display: flex; gap: 4px; align-items: center; }
+  .nav-links a {
+    text-decoration: none; color: var(--ink); font-weight: 700; font-size: .95rem;
+    padding: 8px 12px; border-radius: 8px;
+  }
+  .nav-links a:hover { background: color-mix(in srgb, var(--moss) 15%, transparent); }
+  .btn {
+    font: inherit; font-weight: 700; cursor: pointer;
+    border: none; border-radius: 999px; padding: 9px 18px;
+  }
+  .btn-donate { background: #00CFA0; color: #000E2C; } /* Forge Teal CTA per brand guide */
+  .btn-donate:hover { filter: brightness(1.08); }
+  /* Icon-only logo variant: circular badge carries its own Dark Sky ring, safe on light backgrounds */
+  .brand img { border-radius: 50%; }
+  .btn-icon {
+    background: transparent; border: 1px solid var(--line); color: var(--ink);
+    width: 40px; height: 40px; border-radius: 999px; padding: 0;
+    display: inline-flex; align-items: center; justify-content: center; font-size: 1.1rem;
+  }
+  .btn-icon:hover { background: color-mix(in srgb, var(--moss) 15%, transparent); }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+
+  /* Mobile menu */
+  .menu-toggle { display: none; }
+  @media (max-width: 760px) {
+    .menu-toggle { display: inline-flex; }
+    .nav-links {
+      display: none;
+      position: absolute; top: var(--nav-h); left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0;
+      background: var(--paper); border-bottom: 1px solid var(--line);
+      padding: 8px 12px 12px;
+      box-shadow: 0 12px 24px rgb(0 0 0 / .12);
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: 14px 12px; }
+    .brand-name { font-size: .95rem; }
+  }
+
+  /* ---------- Outage tape notice ---------- */
+  .tape {
+    background: var(--tape);
+    border-bottom: 1px dashed color-mix(in srgb, var(--ink) 30%, transparent);
+    text-align: center; padding: 8px 16px; font-size: .95rem;
+  }
+  .tape strong { font-family: "Montserrat", sans-serif; }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; }
+  .hero img {
+    width: 100%; height: min(62vh, 560px); object-fit: cover; object-position: center 32%;
+    background: linear-gradient(135deg, var(--moss), var(--bark)); /* fallback while photo loads / if missing */
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgb(0 14 44 / .82) 0%, rgb(0 14 44 / .18) 55%, transparent 100%);
+    display: flex; align-items: flex-end;
+  }
+  .hero-copy { padding: clamp(20px, 4vw, 48px); color: #D9F4FF; max-width: 860px; }
+  .hero-copy h1 { margin: 0 0 6px; font-size: clamp(1.7rem, 4.5vw, 3rem); font-weight: 800; }
+  .hero-copy p { margin: 0; font-size: clamp(1rem, 2.2vw, 1.2rem); }
+
+  /* ---------- Sections ---------- */
+  main { max-width: 1040px; margin: 0 auto; padding: 0 16px 64px; }
+  section { padding-top: 48px; }
+  .eyebrow {
+    display: inline-block; font-size: .8rem; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--bark);
+    border: 1px solid color-mix(in srgb, var(--moss) 60%, transparent); border-radius: 999px; padding: 3px 12px; margin-bottom: 8px;
+  }
+  section h2 { margin: 0 0 16px; font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 800; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 20px; border-top: 4px solid var(--moss);
+  }
+  .card:nth-child(2) { border-top-color: var(--bark); }
+  .card:nth-child(3) { border-top-color: var(--amber); }
+  .card h3 { margin: 0 0 8px; font-size: 1.15rem; }
+  .badge-soon {
+    display: inline-block; vertical-align: middle; margin-left: 6px;
+    font-family: "Open Sans", sans-serif;
+    font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--bark); background: color-mix(in srgb, var(--amber) 22%, transparent);
+    border: 1px solid color-mix(in srgb, var(--amber) 60%, transparent);
+    border-radius: 999px; padding: 2px 9px;
+  }
+  .card p { margin: 0; font-size: .98rem; }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 760px) { .split { grid-template-columns: 1fr; } }
+
+  .map-frame {
+    border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
+    aspect-ratio: 4 / 3; background: var(--card);
+  }
+  .map-frame iframe { width: 100%; height: 100%; border: 0; }
+
+  address { font-style: normal; }
+  .contact-list { list-style: none; padding: 0; margin: 0 0 16px; }
+  .contact-list li { padding: 6px 0; }
+  .contact-list b { color: var(--bark); }
+  html.dark .contact-list b { color: var(--amber); }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 24px 16px 40px; text-align: center; font-size: .9rem;
+    color: color-mix(in srgb, var(--ink) 75%, transparent);
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="brand" href="#top">
+    <img src="assets/logo.png" alt="Redwoods Wonder Forge logo" />
+    <span class="brand-name">Redwoods Wonder Forge</span>
+  </a>
+  <div class="nav-spacer"></div>
+  <div class="nav-links" id="navLinks">
+    <a href="#classes">Programs</a>
+    <a href="#contact">Contact / Find Us</a>
+    <a href="#about">About Us</a>
+  </div>
+  <button class="btn btn-icon" id="themeToggle" aria-label="Toggle light and dark mode" title="Toggle light/dark mode">🌙</button>
+  <button class="btn btn-donate"
+          zeffy-form-link="https://www.zeffy.com/embed/donation-form/049b8714-6530-469b-9159-0e5389e24ce3?modal=true">
+    Donate
+  </button>
+  <button class="btn btn-icon menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+</nav>
+
+<div class="tape" id="top">
+  <strong>Our main website is in the pit for repairs.</strong> While our volunteers wrench on it, everything you need is right here.
+</div>
+
+<header class="hero">
+  <img src="assets/hero.jpg" alt="The Fancy Tomb Crabs, RWF's FIRST Tech Challenge team, with their competition robot" />
+  <div class="hero-overlay">
+    <div class="hero-copy">
+      <h1>Wonder. Create. Discover.</h1>
+      <p>Hands-on STEAM and robotics for youth in Del Norte and Curry Counties — powered entirely by volunteers.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section id="classes">
+    <span class="eyebrow">What we offer</span>
+    <h2>Programs</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Competitive Robotics</h3>
+        <p>Home to three competitive teams: FIRST LEGO League for students ages 9–14 who design, build, and program LEGO robots for each season's missions, and FIRST Tech Challenge for older students engineering a full-size metal robot in CAD and real life. Teams meet weekly from September through the competition season.</p>
+      </div>
+      <div class="card">
+        <h3>Classes &amp; Camps</h3>
+        <p>Seasonal camps and one-off workshops covering robotics, 3D printing, CAD, and more. Schedules and registration are announced as sessions open — reach out below to get on the list.</p>
+      </div>
+      <div class="card">
+        <h3>Field Trips &amp; Outreach Events</h3>
+        <p>We bring the Forge to you — school visits, library programs, and community events across Del Norte and Curry Counties, plus field trips to our space for classes and youth groups.</p>
+      </div>
+      <div class="card">
+        <h3>Redwood Rumblers <span class="badge-soon">Coming soon</span></h3>
+        <p>Our antweight combat robotics league. Design a bot, 3D print and build it, then battle it in the arena. Great for builders who like a little (controlled) chaos.</p>
+      </div>
+      <div class="card">
+        <h3>Crescent Crawlers RC Club <span class="badge-soon">Coming soon</span></h3>
+        <p>Radio-controlled crawler trucks on real terrain. Learn driving skill, vehicle tuning, and basic electronics in a laid-back club setting.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <span class="eyebrow">Say hello</span>
+    <h2>Contact / Find Us</h2>
+    <div class="split">
+      <div>
+        <ul class="contact-list">
+          <li><b>Email:</b> <a href="mailto:hey@RedwoodsWonderForge.org">hey@RedwoodsWonderForge.org</a></li>
+          <li><b>Phone:</b> <a href="tel:+17072325787">(707) 232-5787</a></li>
+          <li><b>Facebook:</b> <a href="https://www.facebook.com/RedwoodsWonderForge" target="_blank" rel="noopener">facebook.com/RedwoodsWonderForge</a></li>
+          <li>
+            <b>Visit:</b>
+            <address>
+              1347 Northcrest Drive<br />
+              Crescent City, CA 95531
+            </address>
+          </li>
+        </ul>
+        <div class="map-frame">
+          <!-- Google Maps embed: in Google Maps, search your address ->
+               Share -> Embed a map -> copy the iframe src into here -->
+          <iframe
+            src="https://www.google.com/maps?q=1347+Northcrest+Drive,+Crescent+City,+CA+95531&output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Map to Redwoods Wonder Forge"></iframe>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-top:0">Send us a message</h3>
+        <iframe data-tally-src="https://tally.so/embed/mR4We4?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+                loading="lazy" width="100%" height="816" frameborder="0" marginheight="0" marginwidth="0"
+                title="Contact Us"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <span class="eyebrow">Who we are</span>
+    <h2>About Us</h2>
+    <p>
+      Founded in 2024 and now in our third year, Redwoods Wonder Forge is a 501(c)(3) nonprofit
+      with a mission to provide high-quality STEAM experiences, education, and opportunities for
+      youth in Del Norte and Curry Counties. Through classes, camps, clubs, community events,
+      school visits, and three competitive robotics teams, we're the only organization within
+      100 miles offering competitive robotics to young people in this region.
+    </p>
+    <p>
+      We serve a rural region where every district school holds Title I status and more than 60%
+      of students qualify for free and reduced lunch — so access is at the heart of everything we
+      do. In our first two years we served more than 150 youth in-house and reached over 1,000
+      through community events, and two of our three robotics teams advanced to state
+      championships. Partnerships with community organizations, local charter schools, and
+      business sponsors let us offer scholarships and free events across the region.
+    </p>
+    <p>
+      We are a <strong>completely 100% volunteer-run organization</strong> with zero paid staff.
+      Every coach, mentor, and board member donates their time, so every dollar you give goes
+      directly to programs, tools, and materials for young makers. If you'd like to volunteer,
+      sponsor, or donate, we'd love to hear from you.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <em>Wonder. Create. Discover.</em><br />
+  © <span id="year"></span> Redwoods Wonder Forge · Crescent City, California · 100% volunteer-run · www.RedwoodsWonderForge.org<br />
+  A 501(c)(3) nonprofit · EIN 99-2065603
+</footer>
+
+<!-- Tally embed loader (official snippet) -->
+<script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+
+<script>
+  // ----- Theme toggle (defaults to the visitor's system preference) -----
+  var root = document.documentElement;
+  var themeBtn = document.getElementById('themeToggle');
+  function setTheme(dark) {
+    root.classList.toggle('dark', dark);
+    themeBtn.textContent = dark ? '☀️' : '🌙';
+  }
+  setTheme(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  themeBtn.addEventListener('click', function () {
+    setTheme(!root.classList.contains('dark'));
+  });
+
+  // ----- Mobile menu -----
+  var menuBtn = document.getElementById('menuToggle');
+  var links = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', function () {
+    var open = links.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  links.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') { links.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }
+  });
+
+  // ----- Footer year -----
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
