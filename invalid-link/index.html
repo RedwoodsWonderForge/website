@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Page not found — Redwoods Wonder Forge</title>
-<meta name="description" content="That page wandered off into the redwoods. Head back to Redwoods Wonder Forge." />
+<title>Invalid link — Redwoods Wonder Forge</title>
+<meta name="description" content="That link didn't lead anywhere on our site. Head back to Redwoods Wonder Forge." />
 <meta name="robots" content="noindex" />
 
 <!-- Favicon (uses the logo) -->
@@ -14,8 +14,8 @@
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Redwoods Wonder Forge" />
-<meta property="og:title" content="Page not found — Redwoods Wonder Forge" />
-<meta property="og:description" content="That page wandered off into the redwoods. Head back to Redwoods Wonder Forge." />
+<meta property="og:title" content="Invalid link — Redwoods Wonder Forge" />
+<meta property="og:description" content="That link didn't lead anywhere on our site. Head back to Redwoods Wonder Forge." />
 <meta property="og:url" content="https://www.redwoodswonderforge.org/" />
 <meta property="og:image" content="https://www.redwoodswonderforge.org/assets/og-image.png" />
 <meta property="og:image:width" content="1200" />
@@ -24,8 +24,8 @@
 
 <!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Page not found — Redwoods Wonder Forge" />
-<meta name="twitter:description" content="That page wandered off into the redwoods. Head back to Redwoods Wonder Forge." />
+<meta name="twitter:title" content="Invalid link — Redwoods Wonder Forge" />
+<meta name="twitter:description" content="That link didn't lead anywhere on our site. Head back to Redwoods Wonder Forge." />
 <meta name="twitter:image" content="https://www.redwoodswonderforge.org/assets/og-image.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -110,6 +110,8 @@
     background: linear-gradient(120deg, var(--moss), var(--amber));
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
+  .glyph { width: clamp(84px, 22vw, 132px); height: auto; margin: 0 auto 4px; display: block; }
+  .glyph .stroke { stroke: url(#rwfg); }
   main h1 { font-size: clamp(1.4rem, 4vw, 2rem); margin: 8px 0 12px; }
   main p { margin: 0 0 28px; font-size: 1.1rem; }
   .actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
@@ -138,11 +140,27 @@
 </nav>
 
 <main>
-  <p class="code">404</p>
-  <h1>This page wandered off into the redwoods</h1>
-  <p>We couldn't find what you were looking for. It may have moved, or the link might have a typo. Let's get you back on the trail.</p>
+  <svg class="glyph" viewBox="0 0 140 120" role="img" aria-label="A broken link">
+    <defs>
+      <linearGradient id="rwfg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#00CFA0" />
+        <stop offset="1" stop-color="#B376BF" />
+      </linearGradient>
+    </defs>
+    <g class="stroke" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+      <!-- left link half: a capsule opening toward the break on the right -->
+      <path d="M52 40 L40 40 a20 20 0 0 0 -20 20 L20 60 a20 20 0 0 0 20 20 L52 80" />
+      <!-- right link half: a capsule opening toward the break on the left -->
+      <path d="M88 40 L100 40 a20 20 0 0 1 20 20 L120 60 a20 20 0 0 1 -20 20 L88 80" />
+      <!-- little "snap" ticks around the gap -->
+      <path d="M70 30 L70 40" />
+      <path d="M70 80 L70 90" />
+    </g>
+  </svg>
+  <h1>That link took a wrong turn</h1>
+  <p>The link you followed doesn't lead anywhere on our site — it may have a typo, or it might be out of date. Let's get you back on the trail.</p>
   <div class="actions">
-    <a class="btn btn-home btn-lg" href="/">Back to home</a>
+    <a class="btn btn-home btn-lg" href="/">Go to homepage</a>
     <a class="btn btn-outline btn-lg" href="/#contact">Contact us</a>
   </div>
 </main>
