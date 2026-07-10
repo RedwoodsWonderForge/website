@@ -32,104 +32,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
 
-<style>
-  :root {
-    /* RWF brand palette (Design System doc) */
-    --paper:   #D9F4FF;  /* Starlight */
-    --ink:     #000E2C;  /* Dark Sky */
-    --bark:    #313DAE;  /* Night Air */
-    --moss:    #00CFA0;  /* Oxygen */
-    --amber:   #B376BF;  /* Nitrogen */
-    --card:    #FFFFFF;
-    --line:    #AFD4E8;
-    --nav-h: 64px;
-  }
-  html.dark {
-    --paper: #000E2C;
-    --ink:   #D9F4FF;
-    --bark:  #00CFA0;
-    --moss:  #00CFA0;
-    --amber: #B376BF;
-    --card:  #0A1838;
-    --line:  #1E2C55;
-  }
-
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-
-  body {
-    margin: 0; min-height: 100vh;
-    display: flex; flex-direction: column;
-    background: var(--paper); color: var(--ink);
-    font-family: "Open Sans", system-ui, sans-serif;
-    font-size: 1.05rem; line-height: 1.6;
-    transition: background .25s, color .25s;
-  }
-  h1, h2 { font-family: "Montserrat", "Open Sans", sans-serif; line-height: 1.1; }
-  a { color: var(--bark); }
-
-  /* ---------- Nav (matches index.html) ---------- */
-  .nav {
-    position: sticky; top: 0; z-index: 50; height: var(--nav-h);
-    display: flex; align-items: center; gap: 12px; padding: 0 16px;
-    background: color-mix(in srgb, var(--paper) 88%, transparent);
-    backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
-  }
-  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); min-width: 0; }
-  .brand img { height: 40px; width: auto; border-radius: 50%; }
-  .brand-name {
-    font-family: "Montserrat", sans-serif; font-weight: 800;
-    font-size: 1.05rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-  .nav-spacer { flex: 1; }
-  .btn {
-    font: inherit; font-weight: 700; cursor: pointer;
-    border: none; border-radius: 999px; padding: 9px 18px; text-decoration: none;
-    display: inline-flex; align-items: center; justify-content: center;
-  }
-  .btn-home { background: #00CFA0; color: #000E2C; }
-  .btn-home:hover { filter: brightness(1.08); }
-  .btn-icon {
-    background: transparent; border: 1px solid var(--line); color: var(--ink);
-    width: 40px; height: 40px; border-radius: 999px; padding: 0; font-size: 1.1rem;
-  }
-  .btn-icon:hover { background: color-mix(in srgb, var(--moss) 15%, transparent); }
-  a:focus-visible, button:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
-
-  /* ---------- Main ---------- */
-  main {
-    flex: 1; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; text-align: center;
-    padding: 48px 20px; max-width: 640px; margin: 0 auto;
-  }
-  .code {
-    font-family: "Montserrat", sans-serif; font-weight: 800;
-    font-size: clamp(4.5rem, 20vw, 9rem); line-height: 1;
-    letter-spacing: -.02em; margin: 0;
-    background: linear-gradient(120deg, var(--moss), var(--amber));
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-  }
-  main h1 { font-size: clamp(1.4rem, 4vw, 2rem); margin: 8px 0 12px; }
-  main p { margin: 0 0 28px; font-size: 1.1rem; }
-  .actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
-  .btn-lg { padding: 12px 24px; font-size: 1rem; }
-  .btn-outline { background: transparent; border: 1px solid var(--bark); color: var(--bark); }
-  .btn-outline:hover { background: color-mix(in srgb, var(--bark) 12%, transparent); }
-
-  footer {
-    border-top: 1px solid var(--line);
-    padding: 20px 16px 32px; text-align: center; font-size: .9rem;
-    color: color-mix(in srgb, var(--ink) 75%, transparent);
-  }
-  footer em { font-style: normal; font-family: "Montserrat", sans-serif; font-weight: 600; }
-</style>
+<link rel="stylesheet" href="assets/styles.css" />
 </head>
-<body>
+<body class="error-page">
 
 <nav class="nav">
   <a class="brand" href="/">
-    <img src="/assets/logo.png" alt="Redwoods Wonder Forge logo" />
+    <img src="assets/logo.png" alt="Redwoods Wonder Forge logo" />
     <span class="brand-name">Redwoods Wonder Forge</span>
   </a>
   <div class="nav-spacer"></div>
