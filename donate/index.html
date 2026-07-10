@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Donate — Redwoods Wonder Forge</title>
+<meta name="description" content="Support Redwoods Wonder Forge — a 100% volunteer-run STEAM and robotics nonprofit for youth in Del Norte and Curry Counties. Every dollar goes straight to programs." />
+<link rel="canonical" href="https://www.redwoodswonderforge.org/donate/" />
+
+<!-- Favicon (uses the logo) -->
+<link rel="icon" type="image/png" href="/assets/images/logo.png" />
+<link rel="apple-touch-icon" href="/assets/images/logo.png" />
+
+<!-- Open Graph (Facebook, LinkedIn, iMessage, etc.)
+     Ask the user if they want page-specific share content (see SKILL.md).
+     Defaults if they don't: OG_TITLE = the page title, OG_DESCRIPTION = the
+     meta description, OG_IMAGE = og-image.png (the RWF logo card, in
+     /assets/images/).
+     If they supply a custom image, save it 1200x630 to assets/ and update
+     OG_IMAGE, OG_IMAGE_ALT below. -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Redwoods Wonder Forge" />
+<meta property="og:title" content="Donate — Redwoods Wonder Forge" />
+<meta property="og:description" content="Support a 100% volunteer-run STEAM and robotics nonprofit for youth in Del Norte and Curry Counties. Every dollar goes straight to programs." />
+<meta property="og:url" content="https://www.redwoodswonderforge.org/donate/" />
+<meta property="og:image" content="https://www.redwoodswonderforge.org/assets/images/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Redwoods Wonder Forge logo — a redwood tree under a starry aurora sky" />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Donate — Redwoods Wonder Forge" />
+<meta name="twitter:description" content="Support a 100% volunteer-run STEAM and robotics nonprofit for youth in Del Norte and Curry Counties. Every dollar goes straight to programs." />
+<meta name="twitter:image" content="https://www.redwoodswonderforge.org/assets/images/og-image.png" />
+
+<!-- ============================================================
+     Redwoods Wonder Forge — page template
+     Fill the {{PLACEHOLDERS}}, drop your <section> blocks into the
+     content slot, and delete the optional banner/hero if unused.
+
+     DEPLOY LAYOUT — each page is its own folder with an index.html,
+     so the public URL is a clean /slug/ :
+
+       /                     site root
+       ├── index.html            homepage        -> /
+       ├── assets/
+       │   ├── styles.css            shared stylesheet
+       │   └── images/               ALL images live here
+       │       ├── logo.png
+       │       ├── og-image.png
+       │       └── <page images>.jpg
+       └── the-page-slug/
+           └── index.html        this page       -> /the-page-slug/
+
+     All shared files are referenced ROOT-RELATIVE so they resolve from
+     the site root no matter how deep the page sits: the stylesheet at
+     "/assets/styles.css", and every image under "/assets/images/...".
+     Put page-specific images in /assets/images/ too (give them
+     descriptive names) and reference them as "/assets/images/name.jpg".
+     ============================================================ -->
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+<!-- Zeffy embed script (powers the Donate modal) -->
+<script src="https://zeffy-scripts.s3.ca-central-1.amazonaws.com/embed-form-script.min.js"></script>
+
+<link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <a class="brand" href="#top">
+    <img src="/assets/images/logo.png" alt="Redwoods Wonder Forge logo" />
+    <span class="brand-name">Redwoods Wonder Forge</span>
+  </a>
+  <div class="nav-spacer"></div>
+  <div class="nav-links" id="navLinks">
+    <a href="/">Home</a>
+    <a href="/classes/">Classes &amp; Camps</a>
+  </div>
+  <button class="btn btn-icon" id="themeToggle" aria-label="Toggle light and dark mode" title="Toggle light/dark mode">🌙</button>
+  <button class="btn btn-donate"
+          zeffy-form-link="https://www.zeffy.com/embed/donation-form/049b8714-6530-469b-9159-0e5389e24ce3?modal=true">
+    Donate
+  </button>
+  <button class="btn btn-icon menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+</nav>
+
+
+
+<main>
+
+  <section id="donate" style="padding-top:56px">
+    <span class="eyebrow">Support the Forge</span>
+    <h2>Donate</h2>
+    <p>Redwoods Wonder Forge is a <strong>100% volunteer-run 501(c)(3)</strong>
+       with zero paid staff, so every dollar you give goes directly to programs,
+       tools, and materials for young makers in Del Norte and Curry Counties.
+       Thank you for being part of it.</p>
+    <p><strong>Form not loading?</strong> You can also
+       <a href="https://www.zeffy.com/en-US/donation-form/049b8714-6530-469b-9159-0e5389e24ce3"
+          target="_blank" rel="noopener">open our donation form in a new tab</a>.</p>
+
+    <div class="zeffy-wrap">
+      <div data-zeffy-embed data-form-url="/embed/donation-form/049b8714-6530-469b-9159-0e5389e24ce3"></div>
+      <div data-zeffy-embed-fallback style="display:none;">
+        <div style="position:relative;overflow:hidden;height:450px;width:100%;"><iframe title='Donation form powered by Zeffy' style='position: absolute; border: 0; top:0;left:0;bottom:0;right:0;width:100%;height:100%' data-zeffy-embed-src='https://www.zeffy.com/embed/donation-form/049b8714-6530-469b-9159-0e5389e24ce3' allowpaymentrequest allowTransparency="true"></iframe></div>
+      </div>
+      <script
+        src="https://www.zeffy.com/embed/v2/zeffy-embed.js"
+        onerror="document.querySelectorAll('[data-zeffy-embed-fallback]').forEach(function(el){el.style.display='block';el.querySelectorAll('iframe[data-zeffy-embed-src]').forEach(function(f){f.src=f.getAttribute('data-zeffy-embed-src');});});">
+      </script>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <em>Wonder. Create. Discover.</em><br />
+  © <span id="year"></span> Redwoods Wonder Forge · Crescent City, California · 100% volunteer-run · www.RedwoodsWonderForge.org<br />
+  A 501(c)(3) nonprofit · EIN 99-2065603
+</footer>
+
+<!-- Tally embed loader (official snippet) -->
+<script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+
+<script>
+  // ----- Theme toggle (defaults to the visitor's system preference) -----
+  var root = document.documentElement;
+  var themeBtn = document.getElementById('themeToggle');
+  function setTheme(dark) {
+    root.classList.toggle('dark', dark);
+    themeBtn.textContent = dark ? '☀️' : '🌙';
+  }
+  setTheme(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  themeBtn.addEventListener('click', function () {
+    setTheme(!root.classList.contains('dark'));
+  });
+
+  // ----- Mobile menu -----
+  var menuBtn = document.getElementById('menuToggle');
+  var links = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', function () {
+    var open = links.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  links.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') { links.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }
+  });
+
+  // ----- Footer year -----
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

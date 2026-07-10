@@ -173,6 +173,8 @@
     color: color-mix(in srgb, var(--ink) 75%, transparent);
   }
 
+/* Embedded donation / form wrapper (Zeffy, etc.) — gentle top spacing */
+.zeffy-wrap { margin-top: 20px; }
 
 /* ============================================================
    Error / utility pages (404, invalid-link)
